@@ -16,7 +16,7 @@ cart = {
 }
 
 @app.get("/checkout/cart")
-async def root(username: str):
+async def getCart(username: str):
     if username not in cart {
         cart[username] = []
     }
@@ -38,4 +38,12 @@ async def root(username: str):
 
 
     return {"username": username, "grandTotal": grandTotal, "items": items}
+
+@app.put("/checkout/cart")
+async def putCart(username: str, product_id: str, is_add: bool):
+    userCart = cart[username]
+    for item in cart[username]:
+        if item["product"]["id"] == product_id:
+            item["amount"] += 1 if is_add else item["amount"] -= 1
+            return
 
